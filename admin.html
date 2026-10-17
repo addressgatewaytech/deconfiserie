@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin | De Confiserie</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css?v=1">
+<style>
+body{background:#F7F1EC}
+.a-top{background:var(--brand);color:#fff}
+.a-top .container{display:flex;align-items:center;gap:12px;height:60px}
+.a-top b{font-family:var(--serif);font-size:1.25rem}
+.a-top a,.a-top button{color:#FBEFE6;background:none;border:0;font:inherit;cursor:pointer;font-size:.9rem}
+.a-top .sp{margin-left:auto;display:flex;gap:16px;align-items:center}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:20px 0}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 18px;font:600 .9rem var(--sans);cursor:pointer;color:var(--ink-2)}
+.tab[aria-selected=true]{background:var(--brand);border-color:var(--brand);color:#fff}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.kpi small{color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+.kpi div{font-size:1.6rem;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+@media(max-width:800px){.kpis{grid-template-columns:1fr 1fr}}
+.dash{display:grid;grid-template-columns:1.6fr 1fr;gap:14px}
+@media(max-width:900px){.dash{grid-template-columns:1fr}}
+.panel h3{font-family:var(--sans);font-size:1rem;margin-bottom:12px}
+.chart{position:relative}
+.chart svg{width:100%;height:auto;display:block}
+.chart .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.8rem;padding:6px 10px;border-radius:8px;white-space:nowrap;transform:translate(-50%,-110%);display:none}
+.hbar{display:grid;grid-template-columns:minmax(0,1fr) 90px;gap:4px 10px;align-items:center;font-size:.86rem;margin-bottom:10px}
+.hbar .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.hbar .b{grid-column:1/-1;height:8px;background:#F3E9E2;border-radius:4px;overflow:hidden}
+.hbar .b i{display:block;height:100%;background:var(--brand-2);border-radius:0 4px 4px 0}
+table.t{width:100%;border-collapse:collapse;font-size:.88rem;background:#fff}
+table.t th,table.t td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+table.t th{color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
+table.t td.n{text-align:right;font-variant-numeric:tabular-nums}
+table.t img{width:48px;height:60px;object-fit:cover;border-radius:6px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}
+.st{display:inline-flex;align-items:center;gap:5px;font-size:.75rem;font-weight:700;padding:3px 9px;border-radius:999px}
+.st::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.st-Pending{background:#FFF4DB;color:#8A5A00}.st-Confirmed{background:#E6EEFF;color:#2448A8}.st-Delivered{background:#E3F5EB;color:#1F7A4D}.st-Cancelled{background:#FDE8E7;color:#B42318}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.bar .grow{flex:1}
+dialog{border:0;border-radius:16px;padding:0;max-width:640px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+dialog::backdrop{background:rgba(43,26,20,.45)}
+dialog form{padding:22px}
+.dlg-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+.imgprev{width:120px;height:150px;object-fit:cover;border-radius:10px;background:var(--cream);border:1px solid var(--line)}
+.items-row{display:grid;grid-template-columns:1fr 70px 90px 32px;gap:6px;margin-bottom:6px}
+.items-row input,.items-row select{padding:8px}
+.login{max-width:380px;margin:12vh auto;padding:0 16px}
+.muted{color:var(--muted);font-size:.85rem}
+.alert{background:#FFF4DB;border:1px solid #F3D9A0;color:#6B4A00;padding:12px 14px;border-radius:12px;font-size:.88rem;margin-bottom:14px}
+.ok{color:var(--ok);font-weight:600}
+.pill{font-size:.72rem;background:var(--cream);color:var(--brand);padding:2px 8px;border-radius:999px;margin-right:4px}
+</style>
+</head>
+<body>
+<div id="loginView" class="login">
+  <div class="panel">
+    <h1 style="font-size:1.6rem">Admin login</h1>
+    <p class="muted">De Confiserie store manager</p>
+    <form id="loginForm"><div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" required></div>
+    <button class="btn btn-primary btn-block">Sign in</button><p id="loginErr" class="muted" style="color:var(--bad);margin-top:10px"></p></form>
+  </div>
+</div>
+
+<div id="appView" hidden>
+<div class="a-top"><div class="container"><b>De Confiserie · Admin</b><span class="sp"><a href="index.html" target="_blank">View store ↗</a><button id="logout">Log out</button></span></div></div>
+<div class="container" style="padding-bottom:60px">
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="dash" aria-selected="true">Dashboard</button>
+    <button class="tab" role="tab" data-tab="products" aria-selected="false">Products</button>
+    <button class="tab" role="tab" data-tab="sales" aria-selected="false">Sales</button>
+    <button class="tab" role="tab" data-tab="publish" aria-selected="false">Publish &amp; Settings</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <section data-view="dash">
+    <div class="bar"><h2 class="grow" style="margin:0;font-size:1.4rem">Sales dashboard</h2>
+      <select id="range" style="width:auto" aria-label="Date range"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option><option value="365">Last 12 months</option><option value="all">All time</option></select></div>
+    <div class="kpis">
+      <div class="kpi"><small>Revenue</small><div id="kRev">–</div></div>
+      <div class="kpi"><small>Orders</small><div id="kOrd">–</div></div>
+      <div class="kpi"><small>Avg. order value</small><div id="kAov">–</div></div>
+      <div class="kpi"><small>Pending orders</small><div id="kPen">–</div></div>
+    </div>
+    <div class="dash">
+      <div class="panel"><h3 id="chartTitle">Revenue by day (QAR)</h3><div class="chart" id="chart"></div></div>
+      <div class="panel"><h3>Top cakes by revenue</h3><div id="top"></div></div>
+    </div>
+    <div class="panel" style="margin-top:14px"><h3>Recent orders</h3><div class="tw"><table class="t" id="recent"></table></div></div>
+    <p class="muted" style="margin-top:10px">Revenue excludes cancelled orders. Sales are recorded in the Sales tab and stored in this browser – use “Backup” regularly.</p>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section data-view="products" hidden>
+    <div id="unpub" class="alert" hidden>You have unpublished product changes. Go to <b>Publish &amp; Settings</b> to download the update for your website.</div>
+    <div class="bar"><h2 class="grow" style="margin:0;font-size:1.4rem">Products <span class="muted" id="pCount"></span></h2>
+      <input id="pSearch" type="search" placeholder="Search…" style="width:200px">
+      <button class="btn btn-primary btn-sm" id="addProduct">+ Add product</button></div>
+    <div class="tw"><table class="t" id="pTable"></table></div>
+  </section>
+
+  <!-- SALES -->
+  <section data-view="sales" hidden>
+    <div class="bar"><h2 class="grow" style="margin:0;font-size:1.4rem">Sales &amp; orders</h2>
+      <button class="btn btn-ghost btn-sm" id="pasteOrder">Paste WhatsApp order</button>
+      <button class="btn btn-primary btn-sm" id="addSale">+ Record sale</button></div>
+    <div class="bar"><input id="sSearch" type="search" placeholder="Search customer, ref, phone…" class="grow" style="min-width:180px">
+      <select id="sFilter" style="width:auto"><option value="">All statuses</option><option>Pending</option><option>Confirmed</option><option>Delivered</option><option>Cancelled</option></select>
+      <button class="btn btn-outline btn-sm" id="csv">Export CSV</button></div>
+    <div class="tw"><table class="t" id="sTable"></table></div>
+  </section>
+
+  <!-- PUBLISH -->
+  <section data-view="publish" hidden>
+    <div class="panel" style="margin-bottom:14px">
+      <h3>1. Publish product changes to the live website</h3>
+      <p class="muted">This website has no database. Products live in <code>data/products.json</code> and images in <code>images/</code>. After editing products, download the update and upload it to your hosting (File Manager → website root → upload &amp; extract, overwrite existing files).</p>
+      <div class="bar"><button class="btn btn-primary" id="dlZip">Download website update (.zip)</button><button class="btn btn-outline" id="dlJson">Download products.json only</button></div>
+      <p id="pubStatus" class="muted"></p>
+      <label class="check"><input type="checkbox" id="previewToggle"> <span>Preview unpublished changes on the store in <b>this browser only</b></span></label>
+      <div class="bar" style="margin-top:10px"><button class="btn btn-ghost btn-sm" id="markPub">Mark as published</button><button class="btn btn-ghost btn-sm" id="resetDraft">Discard changes (reload live products)</button></div>
+    </div>
+    <div class="panel" style="margin-bottom:14px">
+      <h3>2. Sales data backup</h3>
+      <p class="muted">Sales are saved in this browser only. Download a backup weekly and restore it on another computer if needed.</p>
+      <div class="bar"><button class="btn btn-outline" id="backup">Download backup (.json)</button><label class="btn btn-ghost" style="margin:0">Restore backup<input type="file" id="restore" accept=".json,application/json" hidden></label></div>
+    </div>
+    <div class="panel">
+      <h3>3. Change admin password</h3>
+      <p class="muted">Enter a new password, copy the generated code and paste it as <code>adminHash</code> in <code>assets/js/config.js</code> on your hosting.</p>
+      <div class="bar"><input id="newPw" type="text" placeholder="New password" class="grow" style="min-width:180px"><button class="btn btn-outline" id="genHash">Generate code</button></div>
+      <input id="hashOut" readonly placeholder="Generated code appears here">
+    </div>
+  </section>
+</div>
+</div>
+
+<!-- product dialog -->
+<dialog id="pDlg"><form method="dialog" id="pForm">
+  <h2 style="font-size:1.3rem" id="pDlgTitle">Product</h2>
+  <div style="display:flex;gap:16px;align-items:flex-start;margin-bottom:12px">
+    <img id="pImgPrev" class="imgprev" alt="">
+    <div style="flex:1"><label for="pImg">Product photo</label><input type="file" id="pImg" accept="image/*"><p class="muted" style="margin-top:6px">Auto-compressed to fast WebP. Portrait (4:5) photos look best.</p></div>
+  </div>
+  <div class="field"><label for="pName">Product name *</label><input id="pName" required maxlength="80"></div>
+  <div class="row2"><div class="field"><label for="pPrice">Price (QAR) *</label><input id="pPrice" type="number" min="0" step="1" required></div>
+  <div class="field"><label for="pBadge">Badge (optional)</label><input id="pBadge" maxlength="20" placeholder="e.g. Bestseller, New"></div></div>
+  <div class="field"><label for="pCats">Categories (comma separated)</label><input id="pCats" placeholder="Birthday Cakes, Theme Cakes" list="catList"></div>
+  <div class="field"><label for="pDesc">Description</label><textarea id="pDesc" rows="3" maxlength="400"></textarea></div>
+  <div class="field"><label for="pDetails">Extra details (optional)</label><input id="pDetails" maxlength="200" placeholder="e.g. Personalised name included"></div>
+  <div class="row2"><label class="check"><input type="checkbox" id="pActive" checked> Visible in store</label><label class="check"><input type="checkbox" id="pFeat" checked> Show on homepage</label></div>
+  <div class="dlg-actions"><button type="button" class="btn btn-ghost" data-close>Cancel</button><button class="btn btn-primary" value="save">Save product</button></div>
+</form></dialog>
+
+<!-- sale dialog -->
+<dialog id="sDlg"><form method="dialog" id="sForm">
+  <h2 style="font-size:1.3rem">Sale / order</h2>
+  <div class="row2"><div class="field"><label for="sDate">Order date *</label><input id="sDate" type="date" required></div>
+  <div class="field"><label for="sRef">Order ref</label><input id="sRef" placeholder="DC-…"></div></div>
+  <div class="row2"><div class="field"><label for="sCust">Customer name</label><input id="sCust"></div>
+  <div class="field"><label for="sPhone">Mobile</label><input id="sPhone" type="tel"></div></div>
+  <label>Items</label>
+  <div id="sItems"></div>
+  <button type="button" class="btn btn-ghost btn-sm" id="addItem" style="margin-bottom:12px">+ Add item</button>
+  <div class="row2"><div class="field"><label for="sDel">Delivery charge (QAR)</label><input id="sDel" type="number" min="0" step="1" value="0"></div>
+  <div class="field"><label for="sTotal">Order total (QAR)</label><input id="sTotal" type="number" min="0" step="0.01" readonly></div></div>
+  <div class="row2"><div class="field"><label for="sPay">Payment method</label><select id="sPay"><option>Cash on delivery</option><option>Bank transfer</option><option>Card / payment link</option><option>Other</option></select></div>
+  <div class="field"><label for="sStatus">Status</label><select id="sStatus"><option>Pending</option><option>Confirmed</option><option>Delivered</option><option>Cancelled</option></select></div></div>
+  <div class="field"><label for="sNote">Notes</label><input id="sNote"></div>
+  <div class="dlg-actions"><button type="button" class="btn btn-ghost" data-close>Cancel</button><button class="btn btn-primary" value="save">Save sale</button></div>
+</form></dialog>
+
+<!-- paste dialog -->
+<dialog id="wDlg"><form method="dialog" id="wForm">
+  <h2 style="font-size:1.3rem">Paste WhatsApp order</h2>
+  <p class="muted">Copy the order message the customer sent from the website and paste it below. Items, customer and reference are filled in automatically.</p>
+  <textarea id="wText" rows="10" required placeholder="*New Order – De Confiserie* …"></textarea>
+  <div class="dlg-actions"><button type="button" class="btn btn-ghost" data-close>Cancel</button><button class="btn btn-primary" value="parse">Continue</button></div>
+</form></dialog>
+<datalist id="catList"><option>Birthday Cakes</option><option>Theme Cakes</option><option>Kids Cakes</option><option>Tiered Cakes</option><option>Chocolate Cakes</option></datalist>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="assets/js/config.js?v=1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script src="assets/js/admin.js?v=1" defer></script>
+</body>
+</html>

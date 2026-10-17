@@ -1,0 +1,15 @@
+{
+  "name": "De Confiserie",
+  "short_name": "De Confiserie",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF9F4",
+  "theme_color": "#5A2E1F",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

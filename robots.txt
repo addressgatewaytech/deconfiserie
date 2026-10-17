@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /cart.html
+
+Sitemap: https://deconfiserie.qa/sitemap.xml
