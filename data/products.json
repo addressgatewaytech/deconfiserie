@@ -1,0 +1,102 @@
+[
+  {
+    "id": "chocolate-loaded-fudge-cake",
+    "name": "Chocolate Loaded Fudge Cake",
+    "price": 280,
+    "categories": [
+      "Chocolate Cakes",
+      "Birthday Cakes"
+    ],
+    "badge": "Bestseller",
+    "featured": true,
+    "description": "Rich chocolate fudge cake finished with a glossy chocolate drip and loaded with chocolate bars, wafer sticks and truffles. Personalised with name and a Happy Birthday topper.",
+    "details": "Personalised name included. Final decoration may vary slightly as each cake is handmade.",
+    "image": "images/chocolate-loaded-fudge-cake.webp",
+    "thumb": "images/thumb/chocolate-loaded-fudge-cake.webp",
+    "active": true
+  },
+  {
+    "id": "customised-2-tier-birthday-cake",
+    "name": "Customised 2-Tier Birthday Cake",
+    "price": 300,
+    "categories": [
+      "Tiered Cakes",
+      "Birthday Cakes",
+      "Kids Cakes"
+    ],
+    "badge": "",
+    "featured": true,
+    "description": "Two-tier celebration cake with teddy bear figures, balloons, bunting and golden pearls in soft neutral tones. Colours, name and theme can be customised.",
+    "details": "Personalised name included. Share your colour theme on WhatsApp.",
+    "image": "images/customised-2-tier-birthday-cake.webp",
+    "thumb": "images/thumb/customised-2-tier-birthday-cake.webp",
+    "active": true
+  },
+  {
+    "id": "football-theme-cake",
+    "name": "Football Theme Cake (Fresh Cream)",
+    "price": 180,
+    "categories": [
+      "Theme Cakes",
+      "Kids Cakes",
+      "Birthday Cakes"
+    ],
+    "badge": "",
+    "featured": true,
+    "description": "Fresh-cream football theme cake with a football topper, grass piping and player figure – perfect for young football fans. Name and age personalised.",
+    "details": "Made with normal (fresh) cream. Favourite team colours on request.",
+    "image": "images/football-theme-cake.webp",
+    "thumb": "images/thumb/football-theme-cake.webp",
+    "active": true
+  },
+  {
+    "id": "masha-bear-theme-cake-2-tier",
+    "name": "Masha & Bear Theme Cake – 2 Tier",
+    "price": 320,
+    "categories": [
+      "Theme Cakes",
+      "Kids Cakes",
+      "Tiered Cakes"
+    ],
+    "badge": "Kids Favourite",
+    "featured": true,
+    "description": "Two-tier kids' theme cake with character figures, a cottage-door design, flowers and butterflies in pastel colours. Name and age personalised.",
+    "details": "Personalised name and age included.",
+    "image": "images/masha-bear-theme-cake-2-tier.webp",
+    "thumb": "images/thumb/masha-bear-theme-cake-2-tier.webp",
+    "active": true
+  },
+  {
+    "id": "moon-sun-buttercream-cake",
+    "name": "Moon & Sun Buttercream Cake",
+    "price": 220,
+    "categories": [
+      "Theme Cakes",
+      "Birthday Cakes"
+    ],
+    "badge": "",
+    "featured": true,
+    "description": "Fully buttercream-covered cake shaped as a crescent moon and sun, with clouds and stars piped in blue, white and gold. Personalised birthday message on the board.",
+    "details": "Buttercream covered. Message and number personalised.",
+    "image": "images/moon-sun-buttercream-cake.webp",
+    "thumb": "images/thumb/moon-sun-buttercream-cake.webp",
+    "active": true
+  },
+  {
+    "id": "underwater-theme-cake",
+    "name": "Underwater Theme Cake",
+    "price": 180,
+    "categories": [
+      "Theme Cakes",
+      "Kids Cakes",
+      "Birthday Cakes"
+    ],
+    "badge": "",
+    "featured": true,
+    "description": "Ocean-inspired cake with clownfish, seashells, a pearl oyster, starfish and seaweed details in aqua blue. Personalised name, age and topper.",
+    "details": "Personalised name and age included.",
+    "image": "images/underwater-theme-cake.webp",
+    "thumb": "images/thumb/underwater-theme-cake.webp",
+    "active": true
+  }
+]
